@@ -49,3 +49,14 @@ def parse_orders_input orders_input
 	end
 	return arr
 end
+
+post '/place_order' do
+
+	@c = Order.new params[:orders]
+	if @c.save
+		erb "<h2>Thanks, order is accepted.</h2>"
+	else
+		@error = @c.errors.full_messages.first
+		erb :cart
+	end
+end
