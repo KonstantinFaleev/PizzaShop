@@ -21,7 +21,17 @@ get '/about' do
 	erb :about
 end
 
-@o = {}
+post '/place_order' do
+
+	@order = Order.create params[:order]
+	if @order.save
+		erb :order_placed
+	else
+		@error = @order.errors.full_messages.first
+		erb :cart
+	end
+end
+
 
 post '/cart' do
   @orders_input = params[:orders]
@@ -50,13 +60,3 @@ def parse_orders_input orders_input
 	return arr
 end
 
-post '/place_order' do
-
-	@c = Order.new params[:orders]
-	if @c.save
-		erb "<h2>Thanks, order is accepted.</h2>"
-	else
-		@error = @c.errors.full_messages.first
-		erb :cart
-	end
-end
