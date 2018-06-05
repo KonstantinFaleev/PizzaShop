@@ -24,12 +24,12 @@ end
 post '/place_order' do
 
 	@order = Order.create params[:order]
-	if @order.save
+	#if @order.save
 		erb :order_placed
-	else
-		@error = @order.errors.full_messages.first
-		erb :cart
-	end
+	#else
+	#	@error = @order.errors.full_messages.first
+	#	erb :cart
+	#end
 end
 
 
